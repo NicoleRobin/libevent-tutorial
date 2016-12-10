@@ -1,5 +1,5 @@
 /*
- * gcc -o time-test time-test.c -levent_core
+ * gcc -g -o time-test time-test.c -levent_core
  */
 
 #include <sys/types.h>
@@ -44,7 +44,7 @@ static void timeout_cb(evutil_socket_t fd, short event, void *arg)
 	}
 }
 
-int main(int argc, char *argv)
+int main(int argc, char **argv)
 {
 	struct event timeout;
 	struct timeval tv;
@@ -69,7 +69,7 @@ int main(int argc, char *argv)
 	event_assign(&timeout, base, -1, flags, timeout_cb, (void*)&timeout);
 
 	evutil_timerclear(&tv);
-	tv.tv_sec = 2;
+	tv.tv_sec = 20;
 	event_add(&timeout, &tv);
 
 	evutil_gettimeofday(&lasttime, NULL);
