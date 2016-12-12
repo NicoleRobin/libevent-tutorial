@@ -309,7 +309,7 @@ done:
 
 void syntax(void)
 {
-	fprintf(stdout, "Syntax: http-server <docroot>\n");
+	fprintf(stdout, "Syntax: http-server port <docroot>\n");
 }
 
 int main(int argc, char **argv)
@@ -325,11 +325,13 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	if (argc < 2)
+	if (argc < 3)
 	{
 		syntax();
 		return -1;
 	}
+
+	port = atoi(argv[1]);
 
 	base = event_base_new();
 	if (!base)
@@ -351,7 +353,7 @@ int main(int argc, char **argv)
 
 	/* We want to accept arbitrary requests, so we need to set a "generic" cb
 	* We can also add callbacks for specific paths */
-	evhttp_set_gencb(http, send_document_cb, argv[1]);
+	evhttp_set_gencb(http, send_document_cb, argv[2]);
 
 	/* Now we teel the evhttp what port to listen on */
 	handle = evhttp_bind_socket_with_handle(http, "0.0.0.0", port);

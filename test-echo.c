@@ -1,5 +1,5 @@
 /*
- * gcc -o test-echo test-echo.c -levent_core
+ * gcc -g -o test-echo test-echo.c -levent_core
  */
 #include <sys/socket.h>
 #include <netinet/in.h>

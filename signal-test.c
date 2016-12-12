@@ -1,7 +1,7 @@
+/*
+ * g++ -g -o signal signal.c -levent
+ */
 #include <sys/types.h>
-
-#include <event2/event-config.h>
-
 #include <sys/stat.h>
 #include <sys/queue.h>
 #include <unistd.h>
@@ -19,7 +19,7 @@ int called = 0;
 
 static void signal_cb(evutil_socket_t fd, short event, void *arg)
 {
-	struct event *signal = arg;
+	struct event *signal = (struct event*)arg;
 
 	printf("%s:%d:%s: got signal %d\n", __FILE__, __LINE__, __func__, event_get_signal(signal));
 
