@@ -325,6 +325,12 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	if (argc < 2)
+	{
+		syntax();
+		return -1;
+	}
+
 	base = event_base_new();
 	if (!base)
 	{
